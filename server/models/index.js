@@ -13,13 +13,14 @@ module.exports = {
         }
       })
     }, // a function which produces all the messages
-    post: function (input) {
+    post: function (input, cb) {
       var query = `insert into messages (roomname, username, txt) values ('${input.roomname}', '${input.username}', '${input.txt}')`;
       db.query(query, (err, messages) => {
         if (err) {
           console.log('err from database post', err);
         } else {
           console.log('this successfully posted');
+          cb ();
         }
 
       });
@@ -29,13 +30,12 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function (cb) {
-      var query = 'select * from users';
+      var query = `select * from messages where username = ${CLICKEKASDFKJASDLFJASF}`;
       db.query(query, (err, messages) => {
         if (err) {
           console.log('err from database user get', err);
         } else {
-          console.log('this is users', users);
-          cb(users);
+          cb(null, messages);
         }
       })
     },
